@@ -1,0 +1,727 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Time Series Classification and Clustering (2)}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Time Series Classification and
+Clustering}\label{time-series-classification-and-clustering}
+
+    In a typical classification problem you are given a set of input
+features and a set of discrete output classes and you want to model the
+relationship between the two. There is a myriad of classification
+algorithms that you could use for this problem - SVMs, Naive Bayes,
+k-NN, etc. But what if the input features are not independent such as
+with time series data? In this case SVMs and Naive Bayes would not be a
+good choice since they assume that the input features are independent.
+The k-NN algorithm could still work however it relies on the notion of a
+similarity measure between input examples. Now the question becomes
+\emph{how do we measure the similarity between two time series}?
+
+    \subsection{How about Euclidean
+distance?}\label{how-about-euclidean-distance}
+
+    The Euclidean distance between two time series \(Q\) and \(C\) of length
+\(n\) is defined as
+
+\[d(Q,C) = \sqrt{\sum^n_{i=1}[Q(i)-C(i)]^2}\]
+
+At first glance, it seems like simply calculating the Euclidean distance
+between two time series would give us a good idea of the similarity
+between them. After all, the Euclidean distance between identical time
+series is zero and the Euclidean distance between very different time
+series is large. However, before we settle on Euclidean distance as a
+similarity measure we should clearly state our desired criteria for
+determining the similarity between two time series
+
+    With a good similarity measure, small changes in two time series should
+result in small changes in their similarity. With respect to Euclidean
+distance this is true for changes in the y-axis, but it is not true for
+changes in the time axis (i.e. compression and stretching). Consider the
+following example.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pylab} \PY{k}{as} \PY{n+nn}{plt}
+         
+         \PY{n}{x}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{50}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)}
+         \PY{n}{ts1}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{l+m+mf}{3.1}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{x}\PY{o}{/}\PY{l+m+mf}{1.5}\PY{p}{)}\PY{o}{+}\PY{l+m+mf}{3.5}\PY{p}{)}
+         \PY{n}{ts2}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{l+m+mf}{2.2}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{x}\PY{o}{/}\PY{l+m+mf}{3.5}\PY{o}{+}\PY{l+m+mf}{2.4}\PY{p}{)}\PY{o}{+}\PY{l+m+mf}{3.2}\PY{p}{)}
+         \PY{n}{ts3}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{l+m+mf}{0.04}\PY{o}{*}\PY{n}{x}\PY{o}{+}\PY{l+m+mf}{3.0}\PY{p}{)}
+         
+         \PY{n}{ts1}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ts2}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ts3}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ts1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ts2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ts3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_5_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    In the above example, it is clear that \(ts1\) and \(ts2\) are most
+similar (they are both \(sin\) functions under different
+transformations). \(ts3\) is clearly the most different. Let's compute
+the Euclidean distance \(d(ts1,ts2)\) and \(d(ts1,ts3)\) to see if the
+Euclidean distance measure agrees with what our intuition tells us.
+Let's first create a function that computes the Euclidean distance
+between two time series.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{k}{def} \PY{n+nf}{euclid\PYZus{}dist}\PY{p}{(}\PY{n}{t1}\PY{p}{,}\PY{n}{t2}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{n}{sqrt}\PY{p}{(}\PY{n+nb}{sum}\PY{p}{(}\PY{p}{(}\PY{n}{t1}\PY{o}{\PYZhy{}}\PY{n}{t2}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    Let's now find the Euclidean distance between \(ts1\) and \(ts2\)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{n+nb}{print} \PY{n}{euclid\PYZus{}dist}\PY{p}{(}\PY{n}{ts1}\PY{p}{,}\PY{n}{ts2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+26.959216038
+
+    \end{Verbatim}
+
+    and the Euclidean distance between \(ts1\) and \(ts3\)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{n+nb}{print} \PY{n}{euclid\PYZus{}dist}\PY{p}{(}\PY{n}{ts1}\PY{p}{,}\PY{n}{ts3}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+23.1892491903
+
+    \end{Verbatim}
+
+    This is not good because according to the Euclidean distance measure,
+\(ts1\) is more similar to \(ts3\) than to \(ts2\) which contradicts our
+intuition. This is the problem with using the Euclidean distance
+measure. It often produced pessimistic similarity measures when it
+encounters distortion in the time axis. The way to deal with this is to
+use dynamic time warping.
+
+    \subsection{Dynamic Time Warping}\label{dynamic-time-warping}
+
+    Dynamic time warping finds the optimal non-linear alignment between two
+time series. The Euclidean distances between alignments are then much
+less susceptable to pessimistic similarity measurements due to
+distortion in the time axis. There is a price to pay for this, however,
+because dynamic time warping is quadratic in the length of the time
+series used.
+
+    Dynamic time warping works in the following way. Consider two time
+series \(Q\) and \(C\) of the same length \(n\) where
+\[Q=q_1,q_2,...,q_n\] and \[C=c_1,c_2,...,c_n\] The first thing we do is
+construct an \(n\times n\) matrix whose \(i,j^{th}\) element is the
+Euclidean distance between \(q_i\) and \(c_j\). We want to find a path
+through this matrix that minimizes the cumulative distance. This path
+then determines the optimal alignment between the two time series. It
+should be noted that it is possible for one point in a time series to be
+mapped to multiple points in the other time series.
+
+    Let's call the path \(W\) where \[W=w_1,w_2,...,w_K\] where each element
+of \(W\) represents the distance between a point \(i\) in \(Q\) and a
+point \(j\) in \(C\) i.e. \(w_k=(q_i-c_j)^2\)
+
+    So we want to find the path with the minimum Euclidean distance
+\[W^*=argmin_W(\sqrt{\sum_{k=1}^Kw_k})\] The optimal path is found via
+dynamic programming, specifically the following recursive function.
+\[\gamma(i,j)=d(q_i,c_j)+min ( \gamma(i-1,j-1),\gamma(i-1,j),\gamma(i,j-1))\]
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{def} \PY{n+nf}{DTWDistance}\PY{p}{(}\PY{n}{s1}\PY{p}{,} \PY{n}{s2}\PY{p}{)}\PY{p}{:}
+            \PY{n}{DTW}\PY{o}{=}\PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+            
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{s1}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                \PY{n}{DTW}\PY{p}{[}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{inf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{s2}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                \PY{n}{DTW}\PY{p}{[}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{i}\PY{p}{)}\PY{p}{]} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{inf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{DTW}\PY{p}{[}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+        
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{s1}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{s2}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{dist}\PY{o}{=} \PY{p}{(}\PY{n}{s1}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{s2}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+                    \PY{n}{DTW}\PY{p}{[}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{n}{j}\PY{p}{)}\PY{p}{]} \PY{o}{=} \PY{n}{dist} \PY{o}{+} \PY{n+nb}{min}\PY{p}{(}\PY{n}{DTW}\PY{p}{[}\PY{p}{(}\PY{n}{i}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{j}\PY{p}{)}\PY{p}{]}\PY{p}{,}\PY{n}{DTW}\PY{p}{[}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{n}{j}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{DTW}\PY{p}{[}\PY{p}{(}\PY{n}{i}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{j}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+        		
+            \PY{k}{return} \PY{n}{sqrt}\PY{p}{(}\PY{n}{DTW}\PY{p}{[}\PY{n+nb}{len}\PY{p}{(}\PY{n}{s1}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{s2}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    Now let's compute the Euclidean distance between \(ts1\) and \(ts2\)
+using dynamic time warping.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}227}]:} \PY{n+nb}{print} \PY{n}{DTWDistance}\PY{p}{(}\PY{n}{ts1}\PY{p}{,}\PY{n}{ts2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+17.9297184686
+
+    \end{Verbatim}
+
+    and now the dynamic time warping distance between \(ts1\) and \(ts3\)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}228}]:} \PY{n+nb}{print} \PY{n}{DTWDistance}\PY{p}{(}\PY{n}{ts1}\PY{p}{,}\PY{n}{ts3}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+21.5494948244
+
+    \end{Verbatim}
+
+    As you can see, our results have changed from when we only used the
+Euclidean distance measure. Now, in agreement with our intuition,
+\(ts2\) is shown to be more similar to \(ts1\) than \(ts3\) is.
+
+    \subsubsection{Speeding Up Dynamic Time
+Warping}\label{speeding-up-dynamic-time-warping}
+
+    Dynamic time warping has a complexity of \(O(nm)\) where \(n\) is the
+length of the first time series and \(m\) is the length of the second
+time series. If you are performing dynamic time warping multiple times
+on long time series data, this can be prohibitively expensive. However,
+there are a couple of ways to speed things up. The first is to enforce a
+locality constraint. This works under the assumption that it is unlikely
+for \(q_i\) and \(c_j\) to be matched if \(i\) and \(j\) are too far
+apart. The threshold is determined by a window size \(w\). This way,
+only mappings within this window are considered which speeds up the
+inner loop. The following is the modified code which includes the window
+size \(w\).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k}{def} \PY{n+nf}{DTWDistance}\PY{p}{(}\PY{n}{s1}\PY{p}{,} \PY{n}{s2}\PY{p}{,}\PY{n}{w}\PY{p}{)}\PY{p}{:}
+            \PY{n}{DTW}\PY{o}{=}\PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+            
+            \PY{n}{w} \PY{o}{=} \PY{n+nb}{max}\PY{p}{(}\PY{n}{w}\PY{p}{,} \PY{n+nb}{abs}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{s1}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{n+nb}{len}\PY{p}{(}\PY{n}{s2}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+            
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{s1}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{s2}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{DTW}\PY{p}{[}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{n}{j}\PY{p}{)}\PY{p}{]} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{inf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{DTW}\PY{p}{[}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+          
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{s1}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{max}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{i}\PY{o}{\PYZhy{}}\PY{n}{w}\PY{p}{)}\PY{p}{,} \PY{n+nb}{min}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{s2}\PY{p}{)}\PY{p}{,} \PY{n}{i}\PY{o}{+}\PY{n}{w}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{dist}\PY{o}{=} \PY{p}{(}\PY{n}{s1}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{s2}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+                    \PY{n}{DTW}\PY{p}{[}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{n}{j}\PY{p}{)}\PY{p}{]} \PY{o}{=} \PY{n}{dist} \PY{o}{+} \PY{n+nb}{min}\PY{p}{(}\PY{n}{DTW}\PY{p}{[}\PY{p}{(}\PY{n}{i}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{j}\PY{p}{)}\PY{p}{]}\PY{p}{,}\PY{n}{DTW}\PY{p}{[}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{n}{j}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{DTW}\PY{p}{[}\PY{p}{(}\PY{n}{i}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{j}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+        		
+            \PY{k}{return} \PY{n}{sqrt}\PY{p}{(}\PY{n}{DTW}\PY{p}{[}\PY{n+nb}{len}\PY{p}{(}\PY{n}{s1}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{s2}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    Let's test this faster version.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}196}]:} \PY{n+nb}{print} \PY{n}{DTWDistance}\PY{p}{(}\PY{n}{ts1}\PY{p}{,}\PY{n}{ts2}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+18.5965518384
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}197}]:} \PY{n+nb}{print} \PY{n}{DTWDistance}\PY{p}{(}\PY{n}{ts1}\PY{p}{,}\PY{n}{ts3}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+22.4724828468
+
+    \end{Verbatim}
+
+    Another way to speed things up is to use the \emph{LB Keogh} lower bound
+of dynamic time warping. It is defined as
+\[LBKeogh(Q,C)=\sum_{i=1}^n (c_i-U_i)^2I(c_i > U_i)+(c_i-L_i)^2I(c_i < L_i)\]
+where \(U_i\) and \(L_i\) are upper and lower bounds for time series
+\(Q\) which are defined as \(U_i=max(q_{i-r}:q_{i+r})\) and
+\(L_i=min(q_{i-r}:q_{i+r})\) for a reach \(r\) and \(I(\cdot)\) is the
+indicator function. It can be implemented with the following function.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k}{def} \PY{n+nf}{LB\PYZus{}Keogh}\PY{p}{(}\PY{n}{s1}\PY{p}{,}\PY{n}{s2}\PY{p}{,}\PY{n}{r}\PY{p}{)}\PY{p}{:}
+            \PY{n}{LB\PYZus{}sum}\PY{o}{=}\PY{l+m+mi}{0}
+            \PY{k}{for} \PY{n}{ind}\PY{p}{,}\PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{s1}\PY{p}{)}\PY{p}{:}
+                
+                \PY{n}{lower\PYZus{}bound}\PY{o}{=}\PY{n+nb}{min}\PY{p}{(}\PY{n}{s2}\PY{p}{[}\PY{p}{(}\PY{n}{ind}\PY{o}{\PYZhy{}}\PY{n}{r} \PY{k}{if} \PY{n}{ind}\PY{o}{\PYZhy{}}\PY{n}{r}\PY{o}{\PYZgt{}}\PY{o}{=}\PY{l+m+mi}{0} \PY{k}{else} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}\PY{p}{(}\PY{n}{ind}\PY{o}{+}\PY{n}{r}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+                \PY{n}{upper\PYZus{}bound}\PY{o}{=}\PY{n+nb}{max}\PY{p}{(}\PY{n}{s2}\PY{p}{[}\PY{p}{(}\PY{n}{ind}\PY{o}{\PYZhy{}}\PY{n}{r} \PY{k}{if} \PY{n}{ind}\PY{o}{\PYZhy{}}\PY{n}{r}\PY{o}{\PYZgt{}}\PY{o}{=}\PY{l+m+mi}{0} \PY{k}{else} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}\PY{p}{(}\PY{n}{ind}\PY{o}{+}\PY{n}{r}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+                
+                \PY{k}{if} \PY{n}{i}\PY{o}{\PYZgt{}}\PY{n}{upper\PYZus{}bound}\PY{p}{:}
+                    \PY{n}{LB\PYZus{}sum}\PY{o}{=}\PY{n}{LB\PYZus{}sum}\PY{o}{+}\PY{p}{(}\PY{n}{i}\PY{o}{\PYZhy{}}\PY{n}{upper\PYZus{}bound}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+                \PY{k}{elif} \PY{n}{i}\PY{o}{\PYZlt{}}\PY{n}{lower\PYZus{}bound}\PY{p}{:}
+                    \PY{n}{LB\PYZus{}sum}\PY{o}{=}\PY{n}{LB\PYZus{}sum}\PY{o}{+}\PY{p}{(}\PY{n}{i}\PY{o}{\PYZhy{}}\PY{n}{lower\PYZus{}bound}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+            
+            \PY{k}{return} \PY{n}{sqrt}\PY{p}{(}\PY{n}{LB\PYZus{}sum}\PY{p}{)}
+\end{Verbatim}
+
+
+    Let's now test on \(ts1\) and \(ts2\)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}229}]:} \PY{n+nb}{print} \PY{n}{LB\PYZus{}Keogh}\PY{p}{(}\PY{n}{ts1}\PY{p}{,}\PY{n}{ts2}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+6.25389235159
+
+    \end{Verbatim}
+
+    and now \(ts1\) and \(ts3\).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}230}]:} \PY{n+nb}{print} \PY{n}{LB\PYZus{}Keogh}\PY{p}{(}\PY{n}{ts1}\PY{p}{,}\PY{n}{ts3}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+19.9595478694
+
+    \end{Verbatim}
+
+    The \emph{LB Keogh} lower bound method is linear whereas dynamic time
+warping is quadratic in complexity which make it very advantageous for
+searching over large sets of time series.
+
+    \subsection{Classification and
+Clustering}\label{classification-and-clustering}
+
+    Now that we have a reliable method to determine the similarity between
+two time series, we can use the k-NN algorithm for classification.
+Empirically, the best results have come when \(k=1\). The following is
+the 1-NN algorithm that uses dynamic time warping Euclidean distance. In
+this algorithm, \(train\) is the training set of time series examples
+where the class that the time series belongs to is appended to the end
+of the time series. \(test\) is the test set whose corresponding classes
+you are trying to predict. In this algorithm, for every time series in
+the test set, a search must be performed through all points in the
+training set so that the most similar point is found. Given that dynamic
+time warping is quadratic, this can be very computationally expensive.
+We can speed up classification using the \emph{LB Keogh} lower bound.
+Computing \emph{LB Keogh} is much less expensive than performing dynamic
+time warping. And since \(LB Keogh(Q,C) \leq DTW(Q,C)\) , we can
+eliminate time series that cannot possibly be more similar that the
+current most similar time series. In this way we are eliminating many
+unnecessary dynamic time warping computations.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{classification\PYZus{}report}
+        
+        \PY{k}{def} \PY{n+nf}{knn}\PY{p}{(}\PY{n}{train}\PY{p}{,}\PY{n}{test}\PY{p}{,}\PY{n}{w}\PY{p}{)}\PY{p}{:}
+            \PY{n}{preds}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+            \PY{k}{for} \PY{n}{ind}\PY{p}{,}\PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{test}\PY{p}{)}\PY{p}{:}
+                \PY{n}{min\PYZus{}dist}\PY{o}{=}\PY{n+nb}{float}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{inf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{n}{closest\PYZus{}seq}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+                \PY{c+c1}{\PYZsh{}print ind}
+                \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n}{train}\PY{p}{:}
+                    \PY{k}{if} \PY{n}{LB\PYZus{}Keogh}\PY{p}{(}\PY{n}{i}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{j}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{o}{\PYZlt{}}\PY{n}{min\PYZus{}dist}\PY{p}{:}
+                        \PY{n}{dist}\PY{o}{=}\PY{n}{DTWDistance}\PY{p}{(}\PY{n}{i}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{j}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{w}\PY{p}{)}
+                        \PY{k}{if} \PY{n}{dist}\PY{o}{\PYZlt{}}\PY{n}{min\PYZus{}dist}\PY{p}{:}
+                            \PY{n}{min\PYZus{}dist}\PY{o}{=}\PY{n}{dist}
+                            \PY{n}{closest\PYZus{}seq}\PY{o}{=}\PY{n}{j}
+                \PY{n}{preds}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{closest\PYZus{}seq}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+            \PY{k}{return} \PY{n}{classification\PYZus{}report}\PY{p}{(}\PY{n}{test}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{preds}\PY{p}{)}
+\end{Verbatim}
+
+
+    Now let's test it on some data. We will use a window size of 4. Although
+the code is sped up with the use of the \emph{LB Keogh} bound and the
+dynamic time warping locality contraint, it may still take a few minutes
+to run.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{train} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{genfromtxt}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{datasets/train.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{delimiter}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{test} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{genfromtxt}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{datasets/test.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{delimiter}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n+nb}{print} \PY{n}{knn}\PY{p}{(}\PY{n}{train}\PY{p}{,}\PY{n}{test}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+             precision    recall  f1-score   support
+
+          1       1.00      0.96      0.98        50
+          2       0.96      1.00      0.98        50
+          3       1.00      1.00      1.00        50
+          4       0.98      1.00      0.99        50
+          5       1.00      1.00      1.00        50
+          6       1.00      0.98      0.99        50
+
+avg / total       0.99      0.99      0.99       300
+
+
+    \end{Verbatim}
+
+    The same idea can also be applied to k-means clustering. In this
+algorithm, the number of clusters is set \emph{apriori} and similar time
+series are clustered together.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{k+kn}{import} \PY{n+nn}{random}
+        
+        \PY{k}{def} \PY{n+nf}{k\PYZus{}means\PYZus{}clust}\PY{p}{(}\PY{n}{data}\PY{p}{,}\PY{n}{num\PYZus{}clust}\PY{p}{,}\PY{n}{num\PYZus{}iter}\PY{p}{,}\PY{n}{w}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{:}
+            \PY{n}{centroids}\PY{o}{=}\PY{n}{random}\PY{o}{.}\PY{n}{sample}\PY{p}{(}\PY{n}{data}\PY{p}{,}\PY{n}{num\PYZus{}clust}\PY{p}{)}
+            \PY{n}{counter}\PY{o}{=}\PY{l+m+mi}{0}
+            \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{num\PYZus{}iter}\PY{p}{)}\PY{p}{:}
+                \PY{n}{counter}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+                \PY{n+nb}{print} \PY{n}{counter}
+                \PY{n}{assignments}\PY{o}{=}\PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+                \PY{c+c1}{\PYZsh{}assign data points to clusters}
+                \PY{k}{for} \PY{n}{ind}\PY{p}{,}\PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{min\PYZus{}dist}\PY{o}{=}\PY{n+nb}{float}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{inf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                    \PY{n}{closest\PYZus{}clust}\PY{o}{=}\PY{k+kc}{None}
+                    \PY{k}{for} \PY{n}{c\PYZus{}ind}\PY{p}{,}\PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{centroids}\PY{p}{)}\PY{p}{:}
+                        \PY{k}{if} \PY{n}{LB\PYZus{}Keogh}\PY{p}{(}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{o}{\PYZlt{}}\PY{n}{min\PYZus{}dist}\PY{p}{:}
+                            \PY{n}{cur\PYZus{}dist}\PY{o}{=}\PY{n}{DTWDistance}\PY{p}{(}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{,}\PY{n}{w}\PY{p}{)}
+                            \PY{k}{if} \PY{n}{cur\PYZus{}dist}\PY{o}{\PYZlt{}}\PY{n}{min\PYZus{}dist}\PY{p}{:}
+                                \PY{n}{min\PYZus{}dist}\PY{o}{=}\PY{n}{cur\PYZus{}dist}
+                                \PY{n}{closest\PYZus{}clust}\PY{o}{=}\PY{n}{c\PYZus{}ind}
+                    \PY{k}{if} \PY{n}{closest\PYZus{}clust} \PY{o+ow}{in} \PY{n}{assignments}\PY{p}{:}
+                        \PY{n}{assignments}\PY{p}{[}\PY{n}{closest\PYZus{}clust}\PY{p}{]}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{ind}\PY{p}{)}
+                    \PY{k}{else}\PY{p}{:}
+                        \PY{n}{assignments}\PY{p}{[}\PY{n}{closest\PYZus{}clust}\PY{p}{]}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+            
+                \PY{c+c1}{\PYZsh{}recalculate centroids of clusters}
+                \PY{k}{for} \PY{n}{key} \PY{o+ow}{in} \PY{n}{assignments}\PY{p}{:}
+                    \PY{n}{clust\PYZus{}sum}\PY{o}{=}\PY{l+m+mi}{0}
+                    \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n}{assignments}\PY{p}{[}\PY{n}{key}\PY{p}{]}\PY{p}{:}
+                        \PY{n}{clust\PYZus{}sum}\PY{o}{=}\PY{n}{clust\PYZus{}sum}\PY{o}{+}\PY{n}{data}\PY{p}{[}\PY{n}{k}\PY{p}{]}
+                    \PY{n}{centroids}\PY{p}{[}\PY{n}{key}\PY{p}{]}\PY{o}{=}\PY{p}{[}\PY{n}{m}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{assignments}\PY{p}{[}\PY{n}{key}\PY{p}{]}\PY{p}{)} \PY{k}{for} \PY{n}{m} \PY{o+ow}{in} \PY{n}{clust\PYZus{}sum}\PY{p}{]}
+            
+            \PY{k}{return} \PY{n}{centroids}
+                
+\end{Verbatim}
+
+
+    Let's test it on the entire data set (i.e. the training set and the test
+set stacked together).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{train} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{genfromtxt}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{datasets/train.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{delimiter}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{test} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{genfromtxt}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{datasets/test.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{delimiter}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{data}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{vstack}\PY{p}{(}\PY{p}{(}\PY{n}{train}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{test}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+        
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pylab} \PY{k}{as} \PY{n+nn}{plt}
+        
+        \PY{n}{centroids}\PY{o}{=}\PY{n}{k\PYZus{}means\PYZus{}clust}\PY{p}{(}\PY{n}{data}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{centroids}\PY{p}{:}
+            
+            \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_45_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
